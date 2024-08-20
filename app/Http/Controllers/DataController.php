@@ -22,12 +22,11 @@ class DataController extends Controller
 
         try {            
             if (isset($request->id)) {
-                //$games = $this->bulkStore($data);
-                //If nothing we call the api to fill the DB
+                //If we come from a specific id url we filter the call for that specific planet
                 $api_datas = $this->apiDatasProvider->getApiDatasForId($request->id);
                 return view('api/planet', ['planet' => $api_datas]);
             } else {
-                //Elsewhere we get datas from the DB 
+                //Elsewhere we get all datas from the API 
                 $api_datas = $this->apiDatasProvider->getApiDatas();
                 return view('api/planets', ['planetsDatas' => $api_datas]);
             }
